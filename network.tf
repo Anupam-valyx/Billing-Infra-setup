@@ -31,7 +31,10 @@ resource "aws_nat_gateway" "nat" {
 }
 
 resource "aws_eip" "nat" {
-  vpc = true
+  depends_on = [aws_internet_gateway.igw]
+  tags = {
+    Name = "nat-eip"
+  }
 }
 
 resource "aws_route_table" "public" {
